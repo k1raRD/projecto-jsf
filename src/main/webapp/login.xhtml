@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<h:outputStylesheet  library="css" name="styles.css" />
+</h:head>
+
+<h:body>
+
+	<h:form id="formLogin">
+		<h:messages />
+		<h:panelGrid columns="3">
+		
+			<h:outputLabel value="Usuario: *" styleClass="colorText"/>
+			<h:inputText id="txtUsuario" value="#{loginController.usuario}" required="true" requiredMessage="El usuario es requerido."></h:inputText>
+ 			<h:message for="txtUsuario" />
+			
+			<h:outputLabel value="Password: *" styleClass="colorText"/>
+			<h:inputSecret id="txtPassword" value="#{loginController.password}" required="true" requiredMessage="La password es requerida" />
+			<h:message for="txtPassword" />
+			
+			<h:commandButton value="Entrar"  action="#{loginController.ingresar}" />
+
+		</h:panelGrid>
+	</h:form>
+
+</h:body>
+
+</html>
