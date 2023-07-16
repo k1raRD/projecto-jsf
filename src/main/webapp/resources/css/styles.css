@@ -8,3 +8,15 @@
 	border-bottom: 1px solid #BBBBBB;
 	padding: 16px;
 }
+
+.rowTable{
+	text-align: center;
+	background: none repeat scroll 0 0 #FFF;
+	border-top: 1PX solid #BBB;
+}
+
+.rowTableLine{
+	text-align: center;
+	background: none repeat scroll 0 0 #F9F9F9;
+	border-top: 1PX solid #BBB;
+}
