@@ -1,30 +1,52 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<h:outputStylesheet  library="css" name="styles.css" />
+	<!-- 	<h:outputStylesheet library="css" name="styles.css" /> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 </h:head>
 
 <h:body>
 
-	<h:form id="formLogin">
-		<h:messages />
-		<h:panelGrid columns="3">
-		
-			<h:outputLabel value="Usuario: *" styleClass="colorText"/>
-			<h:inputText id="txtUsuario" value="#{loginController.usuario}" required="true" requiredMessage="El usuario es requerido."></h:inputText>
- 			<h:message for="txtUsuario" />
-			
-			<h:outputLabel value="Password: *" styleClass="colorText"/>
-			<h:inputSecret id="txtPassword" value="#{loginController.password}" required="true" requiredMessage="La password es requerida" />
-			<h:message for="txtPassword" />
-			
-			<h:commandButton value="Entrar"  action="#{loginController.ingresar}" />
+	<div class="card">
 
-		</h:panelGrid>
-	</h:form>
+		<h:form id="formLogin">
+			<p:panel id="pnlLogin" header="Inicio de sesion"
+				style="text-align: center">
+				<p:messages id="msgs">
+					<p:autoUpdate />
+				</p:messages>
 
+				<p:growl id="growl" />
+
+				<p:graphicImage name="images/user.png" width="20%" />
+
+				<p:panelGrid id="pnlGridLogin" columns="2" layout="grid"
+					styleClass="showcase-text-align-center"
+					columnClasses="ui-g-12 ui-md-12, ui-g-12 ui-md-12, ui-g-12 ui-md-12">
+
+					<p:outputLabel for="txtUsuario" value="Usuario:"
+						styleClass="colorText" />
+					<p:inputText id="txtUsuario" value="#{loginController.usuario}"
+						required="true" requiredMessage="El usuario es requerido." />
+					<p:message for="txtUsuario" />
+
+					<p:outputLabel for="txtPassword" value="Password:"
+						styleClass="colorText" />
+					<p:password id="txtPassword" value="#{loginController.password}"
+						required="true" requiredMessage="La password es requerida" />
+					<p:message for="txtPassword" />
+
+					<p:commandButton value="Entrar" validateClient="true" ajax="false"
+						action="#{loginController.ingresar}"
+						update="pnlGridLogin,growl,msgs" />
+
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
+	</div>
 </h:body>
 
 </html>

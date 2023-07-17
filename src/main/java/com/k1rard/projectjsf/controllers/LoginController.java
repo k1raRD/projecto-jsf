@@ -40,7 +40,7 @@ public class LoginController {
 				e.printStackTrace();
 			}
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario incorrecto", ""));
+			FacesContext.getCurrentInstance().addMessage("txtUsuario", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario incorrecto", ""));
 		}
 	}
 
