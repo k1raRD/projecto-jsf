@@ -30,6 +30,11 @@ public class PrincipalController implements Serializable{
 	private List<Empleado> empleados;
 	
 	/**
+	 * Lista de empleados filtrados
+	 */
+	private List<Empleado> empleadosFiltrados;
+	
+	/**
 	 * Servicio con los metodos que realizan la logica de negocio de empleados.
 	 */
 	@Inject
@@ -62,6 +67,20 @@ public class PrincipalController implements Serializable{
 	 */
 	public void setEmpleados(List<Empleado> empleados) {
 		this.empleados = empleados;
+	}
+
+	/**
+	 * @return the empleadosFiltrados
+	 */
+	public List<Empleado> getEmpleadosFiltrados() {
+		return empleadosFiltrados;
+	}
+
+	/**
+	 * @param empleadosFiltrados the empleadosFiltrados to set
+	 */
+	public void setEmpleadosFiltrados(List<Empleado> empleadosFiltrados) {
+		this.empleadosFiltrados = empleadosFiltrados;
 	}
 	
 	

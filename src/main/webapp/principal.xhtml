@@ -4,35 +4,85 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<h:outputStylesheet  library="css" name="styles.css" />
+	<h:outputStylesheet library="css" name="styles.css" />
+	<h:outputStylesheet library="webjars" name="primeflex/3.2.0/primeflex.min.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 </h:head>
 
 <h:body>
-	<h:outputText value="Pantalla principal"></h:outputText>
-	
-	<h:dataTable id="tblEmpleados" value="#{principalController.empleados}" var="empleado" headerClass="headerTable" rowClasses="rowTable rowTableLine">
-		<h:column>
-			<f:facet name="header">Nombre</f:facet>
-			<h:outputText value="#{empleado.nombre}"></h:outputText>
-		</h:column>
-		<h:column>
-			<f:facet name="header">Primer Apellido</f:facet>
-			<h:outputText value="#{empleado.primerApellido}"></h:outputText>
-		</h:column>
-		<h:column>
-			<f:facet name="header">Segundo Apellido</f:facet>
-			<h:outputText value="#{empleado.segundoApellido}"></h:outputText>
-		</h:column>
-		<h:column>
-			<f:facet name="header">Puesto</f:facet>
-			<h:outputText value="#{empleado.puesto}"></h:outputText>
-		</h:column>
-		<h:column>
-			<f:facet name="header">Estatus</f:facet>
-			<h:outputText value="Habilitado" rendered="#{empleado.estatus}"></h:outputText>
-			<h:outputText value="Inhabilitado" rendered="#{!empleado.estatus}"></h:outputText>
-		</h:column>
-	</h:dataTable>
+	<p:outputLabel value="Bienvenido #{sessionController.usuarioDto.usuario} a la pantalla principal" />
+
+	<h:form>
+		
+			<p:commandButton value="Cerrar Session" action="#{sessionController.cerrarSesion()}" />
+		
+		<div class="card">
+			<div class="flex">
+				<p:commandButton value="XLS" styleClass="mr-2 mb-2">
+					<p:dataExporter type="xls" target="tblEmpleados" fileName="empleados" />
+				</p:commandButton>
+
+				<p:commandButton value="XLSX" styleClass="mr-2 mb-2">
+					<p:dataExporter type="xlsxstream" target="tblEmpleados" fileName="empleados" />
+				</p:commandButton>
+
+				<p:commandButton value="PDF" styleClass="mr-2 mb-2">
+					<p:dataExporter type="pdf" target="tblEmpleados" fileName="empleados" />
+				</p:commandButton>
+
+				<p:commandButton value="CSV" styleClass="mr-2 mb-2">
+					<p:dataExporter type="csv" target="tblEmpleados" fileName="empleados" />
+				</p:commandButton>
+
+				<p:commandButton value="XML" styleClass="mr-2 mb-2">
+					<p:dataExporter type="xml" target="tblEmpleados" fileName="empleados" />
+				</p:commandButton>
+
+				<p:commandButton value="TXT" styleClass="mr-2 mb-2">
+					<p:dataExporter type="txt" target="tblEmpleados" fileName="empleados"
+						exporter="#{dataExporterView.textExporter}" />
+				</p:commandButton>
+			</div>
+		</div>
+
+		<p:dataTable id="tblEmpleados"
+			value="#{principalController.empleados}" var="empleado"
+			paginator="true" rows="5" paginatorPosition="bottom"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+			currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} registros"
+			emptyMessage="No se encontraron registros"
+			filteredValue="#{principalController.empleadosFiltrados}"
+			reflow="true">
+
+			<p:column headerText="Nombre" filterBy="#{empleado.nombre}"
+				filterMatchMode="contains" sortBy="#{empleado.nombre}">
+				<h:outputText value="#{empleado.nombre}"></h:outputText>
+			</p:column>
+
+			<p:column headerText="Primer Apellido"
+				filterBy="#{empleado.primerApellido}" filterMatchMode="contains"
+				sortBy="#{empleado.primerApellido}">
+				<h:outputText value="#{empleado.primerApellido}"></h:outputText>
+			</p:column>
+
+			<p:column headerText="Segundo Apellido"
+				filterBy="#{empleado.segundoApellido}" filterMatchMode="contains"
+				sortBy="#{empleado.segundoApellido}">
+				<h:outputText value="#{empleado.segundoApellido}"></h:outputText>
+			</p:column>
+
+			<p:column headerText="Puesto" filterBy="#{empleado.puesto}"
+				filterMatchMode="contains" sortBy="#{empleado.puesto}">
+				<h:outputText value="#{empleado.puesto}"></h:outputText>
+			</p:column>
+
+			<p:column headerText="Estatus">
+				<h:outputText value="Habilitado" rendered="#{empleado.estatus}"></h:outputText>
+				<h:outputText value="Inhabilitado" rendered="#{!empleado.estatus}"></h:outputText>
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
 </h:body>
 
 </html>
